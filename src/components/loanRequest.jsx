@@ -102,7 +102,7 @@ const LoanRequest = () => {
             return;
         }
         if(user.loan_amount === null || user.loan_amount <= 10 || user.loan_amount > 1000 ){
-            setValidationError("El importe del prestamo a solicitar debe ser entre 11 y 1000");
+            setValidationError("El importe del préstamo a solicitar debe ser entre 11 y 1000");
             return;
         }
         if(user.loan_weeks === null || user.loan_weeks < 1 || user.loan_weeks > 20 ){
@@ -130,7 +130,7 @@ const LoanRequest = () => {
     if (id === null) {
         return (
             <div className='container col-12 col-md-10 col-lg-8 my-2 my-md-3 my-lg-5 p-4 d-flex flex-column justify-content-center align-items-center bg-white rounded-3'>
-                    <h1 className='display-6'>Solicitud de prestamo</h1>
+                    <h1 className='display-6'>Solicitud de préstamo</h1>
                     <p className='pt-4'>Usuario inexistente. Por favor intente hacer el proceso con un usuario válido.</p>
                 </div>
         );
@@ -140,7 +140,7 @@ const LoanRequest = () => {
     if (unsuccesfullStatus !== null) {
         return (
             <div className='container col-12 col-md-10 col-lg-8 my-2 my-md-3 my-lg-5 p-4 d-flex flex-column justify-content-center align-items-center bg-white rounded-3'>
-                <h1 className='display-6'>Solicitud de prestamo</h1>
+                <h1 className='display-6'>Solicitud de préstamo</h1>
                 <p className='pt-4'>Se ha presentado un error del tipo { unsuccesfullStatus.status } con código "{ unsuccesfullStatus.code }" </p>
             </div>
         )
@@ -152,16 +152,16 @@ const LoanRequest = () => {
             // Thank you page
             return (    
                 <div className='container col-12 col-md-10 col-lg-8 my-2 my-md-3 my-lg-5 p-4 d-flex flex-column justify-content-center align-items-center bg-white rounded-3'>
-                     <h1 className='display-6'>Solicitud de prestamo</h1>
+                     <h1 className='display-6'>Solicitud de préstamo</h1>
                     <div className='text-left'>
-                        <p className='pt-4 text-left'>Su solicitud de prestamo se ha realizado con éxito con los siguientes datos:</p>
+                        <p className='pt-4 text-left'>Su solicitud de préstamo se ha realizado con éxito con los siguientes datos:</p>
                         <ul>
                             <li>Nombre: {responseUpdateUser.data.name}</li>
                             <li>Apellido: {responseUpdateUser.data.surname}</li>
                             <li>Email: {responseUpdateUser.data.email}</li>
                             <li>Teléfono: {responseUpdateUser.data.phone}</li>
                             <li>Edad: {responseUpdateUser.data.age}</li>
-                            <li>Importe del prestamo: {responseUpdateUser.data.loan_amount}</li>
+                            <li>Importe del préstamo: {responseUpdateUser.data.loan_amount} €</li>
                             <li>Fecha de obtención: {userloanDate}</li>
                             <li>Duración del préstamo en años: {responseUpdateUser.data.loan_weeks}</li>
                         </ul>
@@ -173,7 +173,7 @@ const LoanRequest = () => {
         // Error page
         return (
             <div className='container col-12 col-md-10 col-lg-8 my-2 my-md-3 my-lg-5 p-4 d-flex flex-column justify-content-center align-items-center bg-white rounded-3'>
-                <h1 className='display-6'>Solicitud de prestamo</h1>
+                <h1 className='display-6'>Solicitud de préstamo</h1>
                 <p className='pt-4'>Se ha presentado un error al procesar la solicitud. Por favor inténtelo nuevamente.</p>
                 <button onClick={() => setResponseUpdateUser(null)} className="btn btn-primary">Regresar al formulario</button>
             </div>
@@ -183,7 +183,7 @@ const LoanRequest = () => {
     //code to display when the user recieved has an ID and 200 (form)
     return (
         <div className='container col-12 col-md-10 col-lg-8 my-2 my-md-3 my-lg-5 p-4 d-flex flex-column justify-content-center align-items-center bg-white rounded-3'>
-            <h1 className='display-6'>Solicitud de prestamo</h1>
+            <h1 className='display-6'>Solicitud de préstamo</h1>
             <div className='col-8'>
                 <form onSubmit={ sendRequest } className='row g-3 py-4'>
                     <div className="mb-2 col-12">
@@ -210,10 +210,10 @@ const LoanRequest = () => {
                         <input ref={userAgeUpdated} type="number" className="form-control form-control-sm" id="userAge" value={userAge} onChange={(e) => setUserAge(parseInt(e.target.value))} required />
                     </div>
                     <div className="mb-2 mt-4 col-12">
-                        <p className='fs-5 mb-0'>Datos del prestamo a solicitar</p>
+                        <p className='fs-5 mb-0'>Datos del préstamo a solicitar</p>
                     </div>
                     <div className="my-1 col-12">
-                        <label for="loanAmount" className="form-label">Importe del prestamo</label>
+                        <label for="loanAmount" className="form-label">Importe del préstamo</label>
                         <input ref={loanAmount} type="number" min={11} max={1000} className="form-control form-control-sm" id="loanAmount" required/>
                     </div>
                     <div className="my-1 col-12 col-lg-6">
@@ -229,7 +229,7 @@ const LoanRequest = () => {
                         <label className="form-check-label" for="policesCheck">Confirmo que estoy de acuerdo con los <a href='https://cloudframework.io/terminos-y-condiciones/' className='link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover'>términos y condiciones</a></label>
                     </div>
                     <div>
-                        <p>{validationError}</p>
+                        <p className='text-danger'><small>{validationError}</small></p>
                     </div>
                     <button type="submit" className="btn btn-primary">Enviar mi solicitud</button>
                 </form>
